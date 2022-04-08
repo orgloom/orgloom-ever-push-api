@@ -1,0 +1,131 @@
+{
+  "name": "push-all-in-one",
+  "version": "2.2.0",
+  "description": "Push All In One！支持 Server酱、酷推、邮件、钉钉机器人、企业微信机器人、企业微信应用、pushplus、iGot 、Qmsg、息知、PushDeer 等多种推送方式",
+  "author": "CaoMeiYouRen",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "keywords": [
+    "push",
+    "server-chan",
+    "serverchan",
+    "server-chan-turbo",
+    "CoolPush",
+    "email",
+    "dingtalk",
+    "weixin",
+    "wechat",
+    "pushplus",
+    "push+",
+    "iGot",
+    "Qmsg",
+    "xi-zhi",
+    "PushDeer",
+    "pushdeer"
+  ],
+  "scripts": {
+    "lint": "cross-env NODE_ENV=production eslint src *.js --fix --ext .ts,.js",
+    "prebuild": "rimraf dist",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "postbuild": "npm run build:type",
+    "build:type": "api-extractor run",
+    "postbuild:type": "rimraf \"dist/**/!(*.js?(.map)|index.d.ts)\"",
+    "analyzer": "cross-env NODE_ENV=production ANALYZER=true rollup -c",
+    "dev": "cross-env NODE_ENV=development ts-node-dev src/index.ts",
+    "dev:rollup": "cross-env NODE_ENV=development rollup -c",
+    "rm": "rimraf node_modules",
+    "start": "node ./dist/index",
+    "release": "semantic-release",
+    "commit": "git add . && git cz",
+    "test:e2e": "cross-env DEBUG=push:* NODE_ENV=development mocha -r ts-node/register test/register.ts test/**/*.test.ts -R nyan -t 30000",
+    "test:debug": "cross-env DEBUG=push:* NODE_ENV=development ts-node-dev test/index.test.ts",
+    "prepare": "husky install",
+    "test:mining": "node ./test/test-mining",
+    "test:juejin": "node ./test/test-juejin"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@microsoft/api-extractor": "^7.19.4",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-replace": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@types/crypto-js": "^4.1.0",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.168",
+    "@types/mocha": "^9.0.0",
+    "@types/module-alias": "^2.0.0",
+    "@types/node": "^17.0.17",
+    "@types/qs": "^6.9.5",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "commitizen": "^4.2.3",
+    "conventional-changelog-cli": "2.2.2",
+    "conventional-changelog-cmyr-config": "2.0.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-conventional-changelog-cmyr": "^1.0.0",
+    "eslint": "^8.9.0",
+    "eslint-config-cmyr": "^1.1.17",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.1",
+    "lint-staged": "^12.3.4",
+    "lodash": "^4.17.21",
+    "mocha": "^9.2.0",
+    "module-alias": "^2.2.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.67.2",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "semantic-release": "^19.0.2",
+    "should": "^13.2.3",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^1.1.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "colors": "^1.4.0",
+    "crypto-js": "^4.0.0",
+    "debug": "^4.3.1",
+    "qs": "^6.10.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-cmyr"
+    }
+  },
+  "changelog": {
+    "language": "zh"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run lint",
+      "git add"
+    ]
+  }
+}
