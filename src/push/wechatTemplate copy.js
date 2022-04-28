@@ -32,10 +32,11 @@ const wxTemplate = {
   },
   pushService: async ({data, token}) => {
     res = await request({
-      url: `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${token}`
+      url: `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${token}`,
       method: 'POST',
       body: JSON.stringify(data)
     });
   }
 };
+module.exports = wxTemplate;
 module.exports = wxTemplate;

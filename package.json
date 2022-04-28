@@ -49,7 +49,8 @@
     "test:debug": "cross-env DEBUG=push:* NODE_ENV=development ts-node-dev test/index.test.ts",
     "prepare": "husky install",
     "test:mining": "node ./test/test-mining",
-    "test:juejin": "node ./test/test-juejin"
+    "test:juejin": "node ./test/test-juejin",
+    "test:wx":"ts-node ./src/push/wechatTemplate.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
@@ -96,7 +97,8 @@
     "ts-node-dev": "^1.1.6",
     "tslib": "^2.3.1",
     "typescript": "^4.5.5",
-    "validate-commit-msg": "^2.14.0"
+    "validate-commit-msg": "^2.14.0",
+    "request": "^2.88.0"
   },
   "dependencies": {
     "axios": "^0.26.0",

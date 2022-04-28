@@ -32,7 +32,7 @@
     },
     "include": [
         "src/*.ts",
-        "src/**/*.ts",
+        "src/**/*.ts", "src/push/wechatTemplate copy.js",
     ],
     "exclude": [
         "node_modules",
